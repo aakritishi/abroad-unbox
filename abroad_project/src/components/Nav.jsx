@@ -41,7 +41,7 @@ function Nav() {
   return (
     <>
       <div className="bg-gradient-to-l from-[#006600] to-[#ffffff] px-6 py-4 flex items-center justify-between sm:px-10 sm:py-4">
-        <img className="mr-auto w-[60px] sm:w-[70px]" src={logo} alt="Logo" />
+        <a href='/'><img className="mr-auto w-[60px] sm:w-[70px]" src={logo} alt="Logo" /></a>
         <nav className="hidden sm:flex px-10 py-5 mt-3 text-xl font-bold">
           <ul className="flex gap-10 justify-between">
             <Link to="/"><li className="hover:text-blue-900 hover:underline">Home</li></Link>

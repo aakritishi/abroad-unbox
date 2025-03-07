@@ -201,55 +201,56 @@ const successes = [
 function Home() {
     return (
         <>
-            <div className='w-11/12 mx-auto mt-3' >
+            <div className='w-11/12 mx-auto mt-3'>
                 <div className='relative mx-auto flex flex-row overflow-x-scroll gap-4'>
                     {details.map((detail, index) => (
-                        // Wrap everything inside a single parent container
-                        <div key={index} className="relative h-[500px] min-w-[900px]">
-                            {/* Blurred Background Layer  blur-[4px]*/}
+                        <div key={index} className="relative h-[420px] min-w-[350px] sm:h-[650px] md:h-[550px] sm:min-w-[600px] md:min-w-[800px] lg:min-w-[900px]">
+                            {/* Blurred Background Layer */}
                             <div className='absolute inset-0 bg-cover bg-center h-full w-full' style={{ backgroundImage: `url(${detail.photo})` }}>
                                 <div className='bg-black z-[5] w-full h-full opacity-60'></div>
                             </div>
 
                             {/* Content Layer */}
-                            <div className='relative flex flex-col ml-10 text-white z-10 p-10'>
-                                <h2 className='text-3xl font-bold'>{detail.title}</h2>
-                                <p className='mt-5 text-xl'>{detail.memo}</p>
-                                <p className='w-2/3 mt-5'>
+                            <div className='relative flex flex-col ml-5 text-white z-10 p-5 sm:p-8'>
+                                <h2 className='text-xl sm:text-2xl font-bold'>{detail.title}</h2>
+                                <p className='mt-3 text-lg sm:text-xl'>{detail.memo}</p>
+                                <p className='w-full mt-3 sm:w-full text-sm sm:text-base'>
                                     <span dangerouslySetInnerHTML={{ __html: detail.detail_text }}></span>
                                 </p>
-                                {detail.list &&
-                                    <p className='mt-5'>
+                                {detail.list && (
+                                    <p className='mt-3'>
                                         <span dangerouslySetInnerHTML={{ __html: detail.list }}></span>
                                     </p>
-                                }
-                                <p className='w-2/3 mt-5'>
+                                )}
+                                <p className='w-full mt-3 text-sm sm:text-base'>
                                     <span dangerouslySetInnerHTML={{ __html: detail.detail_text2 }}></span>
                                 </p>
-                                <p className='w-1/2 mt-5'>
+                                <p className='w-full mt-3 text-sm sm:text-base'>
                                     <span dangerouslySetInnerHTML={{ __html: detail.detail_text3 }}></span>
                                 </p>
-                                
                             </div>
-                            <div className='absolute bottom-4 right-4 w-full flex flex-row items-center justify-center gap-4 z-20'>
-                                    <a href="https://www.facebook.com/share/183SYEbTBd/" target="_blank">
-                                        <img className="w-12 p-2 hover:bg-white rounded-lg" src={facebook_svg} alt="Facebook" />
-                                    </a>
-                                    <a href="https://www.instagram.com/abroadunbox/profilecard/?igsh=MWRud3N6Ym00a3Rtbw==" target="_blank">
-                                        <img className="w-12 p-2 hover:bg-white rounded-lg" src={instagram_svg} alt="Instagram" />
-                                    </a>
-                                    <a href="https://www.linkedin.com/company/abroad-unbox/" target="_blank">
-                                        <img className="w-12 p-2 hover:bg-white rounded-lg" src={linkedin_svg} alt="Linkedin" />
-                                    </a>
-                                    <a href="https://youtube.com/@abroadunbox?si=XYkMA1BkUFrC9NuA" target="_blank">
-                                        <img className="w-12 p-2 hover:bg-white rounded-lg" src={yt_svg} alt="YouTube" />
-                                    </a>
 
-                                </div>
+                            {/* Social Media Links */}
+                            <div className='absolute bottom-4 right-4 w-full flex flex-row items-center justify-center gap-4 z-20'>
+                                <a href="https://www.facebook.com/share/183SYEbTBd/" target="_blank">
+                                    <img className="w-10 sm:w-12 p-2 hover:bg-white rounded-lg" src={facebook_svg} alt="Facebook" />
+                                </a>
+                                <a href="https://www.instagram.com/abroadunbox/profilecard/?igsh=MWRud3N6Ym00a3Rtbw==" target="_blank">
+                                    <img className="w-10 sm:w-12 p-2 hover:bg-white rounded-lg" src={instagram_svg} alt="Instagram" />
+                                </a>
+                                <a href="https://www.linkedin.com/company/abroad-unbox/" target="_blank">
+                                    <img className="w-10 sm:w-12 p-2 hover:bg-white rounded-lg" src={linkedin_svg} alt="Linkedin" />
+                                </a>
+                                <a href="https://youtube.com/@abroadunbox?si=XYkMA1BkUFrC9NuA" target="_blank">
+                                    <img className="w-10 sm:w-12 p-2 hover:bg-white rounded-lg" src={yt_svg} alt="YouTube" />
+                                </a>
+                            </div>
                         </div>
                     ))}
                 </div>
             </div>
+
+
             <div className='p-2 bg-gradient-to-r from-[#006600] to-[#ffffff] w-11/12 mx-auto mt-3'>
                 <p className='text-2xl font-bold text-white'>Our Commitments and Services</p>
             </div>
