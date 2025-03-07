@@ -50,7 +50,7 @@ function Nav() {
             <a href="/student_login"><li className="hover:text-blue-900 hover:underline">SAT</li></a>
             <a href="/student_login"><li className="hover:text-blue-900 hover:underline">English Proficiency</li></a>
             <a href="/student_login"><li className="hover:text-blue-900 hover:underline">Info Session</li></a>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=27.7172,85.3240" target="_blank">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Abroad Unbox, Kaikastan Marg, Kathmandu 44600" target="_blank">
               <li className="hover:text-blue-900 hover:underline">Navigate</li>
             </a>
           </ul>
