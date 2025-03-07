@@ -7,6 +7,7 @@ function Nav() {
   const [username, setUsername] = useState('');
   const [first_name, setFirstName] = useState('');
   const [role, setRole] = useState('');
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to toggle mobile menu visibility
   const location = useLocation();
 
   useEffect(() => {
@@ -22,7 +23,7 @@ function Nav() {
     } else {
       setIsLoggedIn(false);
     }
-  }, [location]); // re-run when the route changes
+  }, [location]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -33,65 +34,78 @@ function Nav() {
     setUsername('');
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen); // Toggle the menu visibility
+  };
+
   return (
     <>
-      <div className='bg-gradient-to-l from-[#006600] to-[#ffffff] px-10 py-4 flex items-center'>
-        <img className='mr-auto w-[70px]' src={logo} alt='Logo'/>
-        <nav className='px-10 py-5 mt-3 text-xl font-bold mr-auto'>
-        <ul className='flex gap-10 justify-between'>
-          <Link to="/"><li className='hover:text-blue-900 hover:underline'>Home</li></Link>
-          <a href='/student_login'><li className='hover:text-blue-900 hover:underline'>Application</li></a>
-          <a href='/student_login'><li className='hover:text-blue-900 hover:underline'>Essay</li></a>
-          <a href='/student_login'><li className='hover:text-blue-900 hover:underline'>SAT</li></a>
-          <a href='/student_login'><li className='hover:text-blue-900 hover:underline'>English Proficiency</li></a>
-          <a href='/student_login'><li className='hover:text-blue-900 hover:underline'>Info Session</li></a>
-          <a href="https://www.google.com/maps/dir/?api=1&destination=27.7172,85.3240" target="_blank">
-                <li className="hover:text-blue-900 hover:underline">Navigate</li>
+      <div className="bg-gradient-to-l from-[#006600] to-[#ffffff] px-6 py-4 flex items-center justify-between sm:px-10 sm:py-4">
+        <img className="mr-auto w-[60px] sm:w-[70px]" src={logo} alt="Logo" />
+        <nav className="hidden sm:flex px-10 py-5 mt-3 text-xl font-bold">
+          <ul className="flex gap-10 justify-between">
+            <Link to="/"><li className="hover:text-blue-900 hover:underline">Home</li></Link>
+            <a href="/student_login"><li className="hover:text-blue-900 hover:underline">Application</li></a>
+            <a href="/student_login"><li className="hover:text-blue-900 hover:underline">Essay</li></a>
+            <a href="/student_login"><li className="hover:text-blue-900 hover:underline">SAT</li></a>
+            <a href="/student_login"><li className="hover:text-blue-900 hover:underline">English Proficiency</li></a>
+            <a href="/student_login"><li className="hover:text-blue-900 hover:underline">Info Session</li></a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=27.7172,85.3240" target="_blank">
+              <li className="hover:text-blue-900 hover:underline">Navigate</li>
             </a>
-        </ul>
+          </ul>
         </nav>
 
-        {isLoggedIn ? (
-          <div className='flex items-center ml-auto'>
-            <span className='mr-4 text-black'>Welcome, {first_name}, {role}</span>
-            <button
-              onClick={handleLogout}
-              className='p-2 bg-gray-500 text-white rounded-lg cursor-pointer hover:bg-black hover:scale-105 transition-transform duration-200'>
-              Log Out
-            </button>
-          </div>
-        ) : (
-          <div className='flex items-center ml-auto'>
-            {/* <Link to="/students">
-              <button className='ml-auto p-2 bg-gray-500 text-white rounded-lg cursor-pointer mr-4 hover:bg-black hover:scale-105 transition-transform duration-200'>
-                Students
+        <div className="flex items-center ml-auto">
+          {isLoggedIn ? (
+            <div className="flex items-center">
+              <span className="mr-4 text-black">Welcome, {first_name}</span>
+              <button
+                onClick={handleLogout}
+                className="p-2 bg-gray-500 text-white rounded-lg cursor-pointer hover:bg-black hover:scale-105 transition-transform duration-200"
+              >
+                Log Out
               </button>
-            </Link> */}
+            </div>
+          ) : (
             <Link to="/student_login">
-              <button className='ml-auto p-2 bg-[#1a53ff] text-white rounded-lg cursor-pointer mr-4 hover:bg-black hover:scale-105 transition-transform duration-200'>
+              <button className="ml-auto p-2 bg-[#1a53ff] text-white rounded-lg cursor-pointer mr-4 hover:bg-black hover:scale-105 transition-transform duration-200">
                 Log In
               </button>
             </Link>
-            {/* <Link to="/student_login">
-              <button className='ml-auto p-2 bg-[#008080] text-white rounded-lg cursor-pointer hover:bg-black hover:scale-105 transition-transform duration-200'>
-                Student Log In
-              </button>
-            </Link> */}
-          </div>
-        )}
+          )}
+        </div>
+
+        {/* Mobile Menu Icon */}
+        <div className="sm:hidden">
+          <button
+            onClick={toggleMenu}
+            className="text-white"
+            aria-label="Menu"
+          >
+            ☰
+          </button>
+        </div>
       </div>
-      {/* <nav className='bg-gradient-to-r from-[#339933] to-[#99ccff] px-10 py-5 mt-3 text-xl font-bold'>
-        <ul className='flex gap-10 justify-between'>
-          <Link to="/"><li className='hover:text-blue-900 hover:underline'>Home</li></Link>
-          <a href=''><li className='hover:text-blue-900 hover:underline'>Application</li></a>
-          <a href=''><li className='hover:text-blue-900 hover:underline'>Essay</li></a>
-          <a href=''><li className='hover:text-blue-900 hover:underline'>SAT</li></a>
-          <a href=''><li className='hover:text-blue-900 hover:underline'>English Proficiency</li></a>
-          <a href=''><li className='hover:text-blue-900 hover:underline'>Info Session</li></a>
+
+      {/* Mobile Navigation (Hidden by default) */}
+      <div className={`sm:hidden bg-gradient-to-l from-[#006600] to-[#ffffff] text-xl font-bold ${isMenuOpen ? 'block' : 'hidden'}`}>
+        <ul className="flex flex-col gap-5 py-5">
+          <Link to="/"><li className="hover:text-blue-900 hover:underline">Home</li></Link>
+          <a href="/student_login"><li className="hover:text-blue-900 hover:underline">Application</li></a>
+          <a href="/student_login"><li className="hover:text-blue-900 hover:underline">Essay</li></a>
+          <a href="/student_login"><li className="hover:text-blue-900 hover:underline">SAT</li></a>
+          <a href="/student_login"><li className="hover:text-blue-900 hover:underline">English Proficiency</li></a>
+          <a href="/student_login"><li className="hover:text-blue-900 hover:underline">Info Session</li></a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=27.7172,85.3240" target="_blank">
+            <li className="hover:text-blue-900 hover:underline">Navigate</li>
+          </a>
         </ul>
-      </nav> */}
+      </div>
     </>
   );
 }
 
 export default Nav;
+
+
