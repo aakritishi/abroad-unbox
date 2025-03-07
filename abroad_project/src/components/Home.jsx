@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
+import React, { useRef } from 'react';
 import linkedin_svg from '../assets/svg/linkedin1.svg'
 import facebook_svg from '../assets/svg/facebook1.svg'
 import instagram_svg from '../assets/svg/instagram1.svg'
@@ -16,6 +17,7 @@ import essay_svg from '../assets/svg/essay.svg'
 import passport_visa_svg from '../assets/svg/passport-visa.svg'
 import interview_svg from '../assets/svg/interview.svg'
 import flight_svg from '../assets/svg/flight.svg'
+import next_svg from '../assets/svg/next.svg'
 import photo1 from '../assets/sucess_img/photo1.png'
 import photo2 from '../assets/sucess_img/photo2.png'
 import photo3 from '../assets/sucess_img/photo3.png'
@@ -45,8 +47,9 @@ const details = [
     {
         photo: bg1,
         title: "Welcome to Abroad Unbox",
+        detail_text: "Mentor to your Career",
         memo: "Welcome to your study and career in the US",
-        detail_text: "We are <strong>Prep School</strong>, not a consultancy helping students not just with getting your <strong>visa</strong>, but making sure you are able to <strong>succeed</strong> out there as well.",
+        detail_text2: "We are <strong>Prep School</strong>, not a consultancy helping students not just with getting your <strong>visa</strong>, but making sure you are able to <strong>succeed</strong> out there as well.",
     },
     {
         photo: bg2,
@@ -199,205 +202,247 @@ const successes = [
 ];
 
 function Home() {
+    // const containerRef = useRef(null);
+
+    // // Function to scroll the container
+    // const scrollRight = () => {
+    //     if (containerRef.current) {
+    //         containerRef.current.scrollBy({
+    //             left: 400, // Adjust this value based on how much you want to scroll
+    //             behavior: 'smooth',
+    //         });
+    //     }
+    // };
+
     return (
         <>
-            <div className='w-11/12 mx-auto mt-3'>
-                <div className='relative mx-auto flex flex-row overflow-x-scroll gap-4'>
-                    {details.map((detail, index) => (
-                        <div key={index} className="relative h-[420px] min-w-[350px] sm:h-[650px] md:h-[550px] sm:min-w-[600px] md:min-w-[800px] lg:min-w-[900px]">
-                            {/* Blurred Background Layer */}
-                            <div className='absolute inset-0 bg-cover bg-center h-full w-full' style={{ backgroundImage: `url(${detail.photo})` }}>
-                                <div className='bg-black z-[5] w-full h-full opacity-60'></div>
-                            </div>
+            <div className="relative">
+            {/* ref={containerRef} */}
+                <div className='w-11/12 mx-auto mt-3'> 
+                    <div className='relative mx-auto flex flex-row overflow-x-scroll gap-4'>
+                        {details.map((detail, index) => (
+                            <div key={index} className="relative h-[420px] min-w-[350px] sm:h-[650px] md:h-[550px] sm:min-w-[600px] md:min-w-[800px] lg:min-w-[900px]">
+                                {/* Blurred Background Layer */}
+                                <div className='absolute inset-0 bg-cover bg-center h-full w-full' style={{ backgroundImage: `url(${detail.photo})` }}>
+                                    <div className='bg-black z-[5] w-full h-full opacity-60'></div>
+                                </div>
 
-                            {/* Content Layer */}
-                            <div className='relative flex flex-col ml-5 text-white z-10 p-5 sm:p-8'>
-                                <h2 className='text-xl sm:text-2xl font-bold'>{detail.title}</h2>
-                                <p className='mt-3 text-lg sm:text-xl'>{detail.memo}</p>
-                                <p className='w-full mt-3 sm:w-full text-sm sm:text-base'>
-                                    <span dangerouslySetInnerHTML={{ __html: detail.detail_text }}></span>
-                                </p>
-                                {detail.list && (
-                                    <p className='mt-3'>
-                                        <span dangerouslySetInnerHTML={{ __html: detail.list }}></span>
+                                {/* Content Layer */}
+                                <div className='relative w-3/4 flex flex-col ml-5 text-white z-10 p-5 sm:p-8'>
+                                    <h2 className='text-xl sm:text-2xl font-bold'>{detail.title}</h2>
+                                    <p className='mt-3 text-lg sm:text-xl'>{detail.memo}</p>
+                                    <p className='w-full mt-3 sm:w-full text-sm sm:text-base'>
+                                        <span dangerouslySetInnerHTML={{ __html: detail.detail_text }}></span>
                                     </p>
-                                )}
-                                <p className='w-full mt-3 text-sm sm:text-base'>
-                                    <span dangerouslySetInnerHTML={{ __html: detail.detail_text2 }}></span>
-                                </p>
-                                <p className='w-full mt-3 text-sm sm:text-base'>
-                                    <span dangerouslySetInnerHTML={{ __html: detail.detail_text3 }}></span>
-                                </p>
-                            </div>
+                                    {detail.list && (
+                                        <p className='mt-3'>
+                                            <span dangerouslySetInnerHTML={{ __html: detail.list }}></span>
+                                        </p>
+                                    )}
+                                    <p className='w-full mt-3 text-sm sm:text-base'>
+                                        <span dangerouslySetInnerHTML={{ __html: detail.detail_text2 }}></span>
+                                    </p>
+                                    <p className='w-full mt-3 text-sm sm:text-base'>
+                                        <span dangerouslySetInnerHTML={{ __html: detail.detail_text3 }}></span>
+                                    </p>
+                                </div>
 
-                            {/* Social Media Links */}
-                            <div className='absolute bottom-4 right-4 w-full flex flex-row items-center justify-center gap-4 z-20'>
-                                <a href="https://www.facebook.com/share/183SYEbTBd/" target="_blank">
-                                    <img className="w-10 sm:w-12 p-2 hover:bg-white rounded-lg" src={facebook_svg} alt="Facebook" />
-                                </a>
-                                <a href="https://www.instagram.com/abroadunbox/profilecard/?igsh=MWRud3N6Ym00a3Rtbw==" target="_blank">
-                                    <img className="w-10 sm:w-12 p-2 hover:bg-white rounded-lg" src={instagram_svg} alt="Instagram" />
-                                </a>
-                                <a href="https://www.linkedin.com/company/abroad-unbox/" target="_blank">
-                                    <img className="w-10 sm:w-12 p-2 hover:bg-white rounded-lg" src={linkedin_svg} alt="Linkedin" />
-                                </a>
-                                <a href="https://youtube.com/@abroadunbox?si=XYkMA1BkUFrC9NuA" target="_blank">
-                                    <img className="w-10 sm:w-12 p-2 hover:bg-white rounded-lg" src={yt_svg} alt="YouTube" />
-                                </a>
+                                {/* Social Media Links */}
+                                <div className='absolute bottom-4 right-4 w-full flex flex-row items-center justify-center gap-4 z-20'>
+                                    <a href="https://www.facebook.com/share/183SYEbTBd/" target="_blank">
+                                        <img className="w-10 sm:w-12 p-2 hover:bg-white rounded-lg" src={facebook_svg} alt="Facebook" />
+                                    </a>
+                                    <a href="https://www.instagram.com/abroadunbox/profilecard/?igsh=MWRud3N6Ym00a3Rtbw==" target="_blank">
+                                        <img className="w-10 sm:w-12 p-2 hover:bg-white rounded-lg" src={instagram_svg} alt="Instagram" />
+                                    </a>
+                                    <a href="https://www.linkedin.com/company/abroad-unbox/" target="_blank">
+                                        <img className="w-10 sm:w-12 p-2 hover:bg-white rounded-lg" src={linkedin_svg} alt="Linkedin" />
+                                    </a>
+                                    <a href="https://youtube.com/@abroadunbox?si=XYkMA1BkUFrC9NuA" target="_blank">
+                                        <img className="w-10 sm:w-12 p-2 hover:bg-white rounded-lg" src={yt_svg} alt="YouTube" />
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+                </div>
+                <div
+                    className="absolute right-0 top-1/2 transform -translate-y-1/2 text-2xl cursor-pointer lg:hidden"
+                    // onClick={scrollRight}
+                >
+                    <img className="w-12 h-12 mx-auto" src={next_svg} alt="Next" />
+
                 </div>
             </div>
-
 
             <div className='p-2 bg-gradient-to-r from-[#006600] to-[#ffffff] w-11/12 mx-auto mt-3'>
                 <p className='text-2xl font-bold text-white'>Our Commitments and Services</p>
             </div>
-            <div className='w-11/12 mx-auto mt-3 flex flex-row gap-3 overflow-x-scroll'>
-                {services.map((service, index) => (
-                    <div key={index} className="relative ">
-                        <div className="h-[400px] min-w-[350px] bg-[#e6ffe6] p-2">
-                            <a href="/student_login">
-                                <img className="w-12 h-12 mx-auto" src={service.svg} alt={service.title} />
-                            </a>
-                            <a href="/student_login">
-                                <h2 className='text-center text-2xl underline'>{service.title}</h2>
-                            </a>
-                            <p className='w-full mt-5'>
-                                <span dangerouslySetInnerHTML={{ __html: service.text1 }}></span>
-                            </p>
-                            <p className='w-full mt-5'>
-                                <span dangerouslySetInnerHTML={{ __html: service.text2 }}></span>
-                            </p>
-                            <p className='w-full mt-5'>
-                                <span dangerouslySetInnerHTML={{ __html: service.text3 }}></span>
-                            </p>
+            <div className="relative">
+                {/* Scrollable container */}
+                <div className='w-11/12 mx-auto mt-3 flex flex-row gap-3 overflow-x-scroll'>
+                    {services.map((service, index) => (
+                        <div key={index} className="relative">
+                            <div className="h-[400px] min-w-[350px] bg-[#e6ffe6] p-2">
+                                <a href="/student_login">
+                                    <img className="w-12 h-12 mx-auto" src={service.svg} alt={service.title} />
+                                </a>
+                                <a href="/student_login">
+                                    <h2 className='text-center text-2xl underline'>{service.title}</h2>
+                                </a>
+                                <p className='w-full mt-5'>
+                                    <span dangerouslySetInnerHTML={{ __html: service.text1 }}></span>
+                                </p>
+                                <p className='w-full mt-5'>
+                                    <span dangerouslySetInnerHTML={{ __html: service.text2 }}></span>
+                                </p>
+                                <p className='w-full mt-5'>
+                                    <span dangerouslySetInnerHTML={{ __html: service.text3 }}></span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
+
+                {/* Arrow (fixed and only visible on mobile) */}
+                <div
+                    className="absolute right-0 top-1/2 transform -translate-y-1/2 text-2xl cursor-pointer lg:hidden"
+                    // onClick={scrollRight}
+                >
+                    <img className="w-12 h-12 mx-auto" src={next_svg} alt="Next" />
+
+                </div>
             </div>
 
             <div className='p-2 bg-gradient-to-r from-[#006600] to-[#ffffff] w-11/12 mx-auto mt-3'>
-                <p className='text-2xl font-bold text-white'>Experiences and Advises by Our Alumni</p>
+                <p className='text-2xl font-bold text-white'>Experiences and Advices by Our Alumni</p>
             </div>
-            <div className='w-11/12 mx-auto mt-3 flex flex-row gap-3 overflow-x-scroll'>
-                <div className="relative">
-                    <div className='h-[400px] min-w-[350px] bg-gray-400'>
-                        <iframe
-                            width="350"
-                            height="400"
-                            src="https://www.youtube.com/embed/eXpbRcULED0"
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen>
-                        </iframe>
+            <div className="relative">
+                <div className='w-11/12 mx-auto mt-3 flex flex-row gap-3 overflow-x-scroll' >
+                    <div className="relative">
+                        <div className='h-[400px] min-w-[350px] bg-gray-400'>
+                            <iframe
+                                width="350"
+                                height="400"
+                                src="https://www.youtube.com/embed/eXpbRcULED0"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div className="relative">
+                        <div className='h-[400px] min-w-[350px] bg-gray-400'>
+                            <iframe
+                                width="350"
+                                height="400"
+                                src="https://www.youtube.com/embed/zSdyeC3Z_1g"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div className="relative">
+                        <div className='h-[400px] min-w-[350px] bg-gray-400'>
+                            <iframe
+                                width="350"
+                                height="400"
+                                src="https://www.youtube.com/embed/ULaOvx6QqnA"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div className="relative">
+                        <div className='h-[400px] min-w-[350px] bg-gray-400'>
+                            <iframe
+                                width="350"
+                                height="400"
+                                src="https://www.youtube.com/embed/YGkFxj6AZ4A"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div className="relative">
+                        <div className='h-[400px] min-w-[350px] bg-gray-400'>
+                            <iframe
+                                width="350"
+                                height="400"
+                                src="https://www.youtube.com/embed/z-4112Vz2is"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div className="relative">
+                        <div className='h-[400px] min-w-[350px] bg-gray-400'>
+                            <iframe
+                                width="350"
+                                height="400"
+                                src="https://www.youtube.com/embed/RGZsYDzTlkU"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div className="relative">
+                        <div className='h-[400px] min-w-[350px] bg-gray-400'>
+                            <iframe
+                                width="350"
+                                height="400"
+                                src="https://www.youtube.com/embed/D4VmCFfZorI"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div className="relative">
+                        <div className='h-[400px] min-w-[350px] bg-gray-400'>
+                            <iframe
+                                width="350"
+                                height="400"
+                                src="https://www.youtube.com/embed/Yla3nOh43Lc"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div className="relative">
+                        <div className='h-[400px] min-w-[350px] bg-gray-400'>
+                            <iframe
+                                width="350"
+                                height="400"
+                                src="https://www.youtube.com/embed/KCaH7g0B97U"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen>
+                            </iframe>
+                        </div>
                     </div>
                 </div>
-                <div className="relative">
-                    <div className='h-[400px] min-w-[350px] bg-gray-400'>
-                        <iframe
-                            width="350"
-                            height="400"
-                            src="https://www.youtube.com/embed/zSdyeC3Z_1g"
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen>
-                        </iframe>
-                    </div>
-                </div>
-                <div className="relative">
-                    <div className='h-[400px] min-w-[350px] bg-gray-400'>
-                        <iframe
-                            width="350"
-                            height="400"
-                            src="https://www.youtube.com/embed/ULaOvx6QqnA"
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen>
-                        </iframe>
-                    </div>
-                </div>
-                <div className="relative">
-                    <div className='h-[400px] min-w-[350px] bg-gray-400'>
-                        <iframe
-                            width="350"
-                            height="400"
-                            src="https://www.youtube.com/embed/YGkFxj6AZ4A"
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen>
-                        </iframe>
-                    </div>
-                </div>
-                <div className="relative">
-                    <div className='h-[400px] min-w-[350px] bg-gray-400'>
-                        <iframe
-                            width="350"
-                            height="400"
-                            src="https://www.youtube.com/embed/z-4112Vz2is"
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen>
-                        </iframe>
-                    </div>
-                </div>
-                <div className="relative">
-                    <div className='h-[400px] min-w-[350px] bg-gray-400'>
-                        <iframe
-                            width="350"
-                            height="400"
-                            src="https://www.youtube.com/embed/RGZsYDzTlkU"
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen>
-                        </iframe>
-                    </div>
-                </div>
-                <div className="relative">
-                    <div className='h-[400px] min-w-[350px] bg-gray-400'>
-                        <iframe
-                            width="350"
-                            height="400"
-                            src="https://www.youtube.com/embed/D4VmCFfZorI"
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen>
-                        </iframe>
-                    </div>
-                </div>
-                <div className="relative">
-                    <div className='h-[400px] min-w-[350px] bg-gray-400'>
-                        <iframe
-                            width="350"
-                            height="400"
-                            src="https://www.youtube.com/embed/Yla3nOh43Lc"
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen>
-                        </iframe>
-                    </div>
-                </div>
-                <div className="relative">
-                    <div className='h-[400px] min-w-[350px] bg-gray-400'>
-                        <iframe
-                            width="350"
-                            height="400"
-                            src="https://www.youtube.com/embed/KCaH7g0B97U"
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen>
-                        </iframe>
-                    </div>
+                <div
+                    className="absolute right-0 top-1/2 transform -translate-y-1/2 text-2xl cursor-pointer lg:hidden"
+                    // onClick={scrollRight}
+                >
+                    <img className="w-12 h-12 mx-auto" src={next_svg} alt="Next" />
+
                 </div>
             </div>
 

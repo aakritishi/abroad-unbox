@@ -47,7 +47,7 @@ function StudentLogin() {
             >
                 <div className="absolute inset-0 bg-black opacity-60"></div>
                 <div className="relative z-10 p-6 w-1/2 bg-opacity-80 rounded-lg shadow-lg h-full flex items-center justify-center">
-                    <div className='w-full max-w-md bg-white bg-opacity-50 flex flex-col gap-y-3 p-6 rounded-lg shadow-lg'>
+                    <div className='w-full max-w-md bg-white/50 flex flex-col gap-y-3 p-6 rounded-lg shadow-lg'>
                         <div className='w-full flex flex-row'>
                             <a href='/student_login' className='w-1/2 text-center text-xl font-bold bg- green-300 py-4 hover:bg -green-400 transition border-r border-gray-500'>
                                 Student Login
