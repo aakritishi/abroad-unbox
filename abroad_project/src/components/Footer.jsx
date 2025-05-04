@@ -11,34 +11,34 @@ function Footer() {
       <div className="w-full sm:w-1/4 mx-auto">
         <p className="text-2xl font-bold text-black">Our Service</p>
         <div className="flex flex-col mt-2">
-          <Link to="/student_login" className="text-black hover:text-green-600">
+          <Link to="/login" className="text-black hover:text-green-600">
             <span>Career Counseling</span>
           </Link>
-          <Link to="/student_login" className="text-black hover:text-green-600">
+          <Link to="/login" className="text-black hover:text-green-600">
             <span>USA Application</span>
           </Link>
-          <Link to="/student_login" className="text-black hover:text-green-600">
+          <Link to="/login" className="text-black hover:text-green-600">
             <span>University Selection</span>
           </Link>
-          <Link to="/student_login" className="text-black hover:text-green-600">
+          <Link to="/login" className="text-black hover:text-green-600">
             <span>Essay Writing</span>
           </Link>
-          <Link to="/student_login" className="text-black hover:text-green-600">
+          <Link to="/login" className="text-black hover:text-green-600">
             <span>Documentation</span>
           </Link>
-          <Link to="/student_login" className="text-black hover:text-green-600">
+          <Link to="/login" className="text-black hover:text-green-600">
             <span>Visa Application</span>
           </Link>
-          <Link to="/student_login" className="text-black hover:text-green-600">
+          <Link to="/login" className="text-black hover:text-green-600">
             <span>Visa Preparation</span>
           </Link>
-          <Link to="/student_login" className="text-black hover:text-green-600">
+          <Link to="/login" className="text-black hover:text-green-600">
             <span>After Visa Sessions</span>
           </Link>
-          <Link to="/student_login" className="text-black hover:text-green-600">
+          <Link to="/login" className="text-black hover:text-green-600">
             <span>SAT Preparation</span>
           </Link>
-          <Link to="/student_login" className="text-black hover:text-green-600">
+          <Link to="/login" className="text-black hover:text-green-600">
             <span>DET/IELTS/TOFEL</span>
           </Link>
         </div>
@@ -56,11 +56,17 @@ function Footer() {
               01-45470760
             </a>
             <span> | </span>
-            <a
+            {/* <a
               href="tel:9848594312"
               className="text-black hover:text-blue-900 hover:underline"
             >
               9848594312
+            </a> */}
+            <a
+              href="viber://chat?number=+9779848594312"
+              className="text-black hover:text-blue-900 hover:underline"
+            >
+              9848594312 (Viber)
             </a>
           </span>
           <a

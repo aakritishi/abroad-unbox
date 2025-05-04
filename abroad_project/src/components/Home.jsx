@@ -5,10 +5,10 @@ import linkedin_svg from '../assets/svg/linkedin1.svg'
 import facebook_svg from '../assets/svg/facebook1.svg'
 import instagram_svg from '../assets/svg/instagram1.svg'
 import yt_svg from '../assets/svg/youtube.svg'
-import bg1 from '../assets/bg_img/Photo 1.jpg'
-import bg2 from '../assets/bg_img/Photo 2.jpg'
-import bg3 from '../assets/bg_img/Photo 3.jpg'
-import bg4 from '../assets/bg_img/Photo 4.jpg'
+import bg1 from '../assets/bg_img/Photo 1-2.jpg'
+import bg2 from '../assets/bg_img/Photo 2-2.jpg'
+import bg3 from '../assets/bg_img/Photo 3-2.jpg'
+import bg4 from '../assets/bg_img/Photo 4-2.jpg'
 import document_svg from '../assets/svg/document.svg'
 import test_svg from '../assets/svg/test.svg'
 import counseling_svg from '../assets/svg/counseling-icon.svg'
@@ -42,6 +42,8 @@ import photo21 from '../assets/sucess_img/photo21.png'
 import photo22 from '../assets/sucess_img/photo22.png'
 import photo23 from '../assets/sucess_img/photo23.png'
 
+import Nav from './Nav';
+import Footer from './Footer';
 
 const details = [
     {
@@ -216,6 +218,7 @@ function Home() {
 
     return (
         <>
+        <Nav />
             <div className="relative">
             {/* ref={containerRef} */}
                 <div className='w-11/12 mx-auto mt-3'> 
@@ -284,10 +287,10 @@ function Home() {
                     {services.map((service, index) => (
                         <div key={index} className="relative">
                             <div className="h-[400px] min-w-[350px] bg-[#e6ffe6] p-2">
-                                <a href="/student_login">
+                                <a href="/login">
                                     <img className="w-12 h-12 mx-auto" src={service.svg} alt={service.title} />
                                 </a>
-                                <a href="/student_login">
+                                <a href="/login">
                                     <h2 className='text-center text-2xl underline'>{service.title}</h2>
                                 </a>
                                 <p className='w-full mt-5'>
@@ -462,7 +465,7 @@ function Home() {
                     </div>
                 ))}
             </div>
-
+            <Footer />
         </>
     );
 }
