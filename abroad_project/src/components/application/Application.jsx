@@ -14,21 +14,30 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 function Application() {
   const [stages, setStages] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeStage, setActiveStage] = useState(1); 
+  const [activeStage, setActiveStage] = useState(1);
   const student_id = localStorage.getItem("student_id");
-
-  const getStages = async () => {
-    try {
-      const response = await axios.get(
-        `${API_BASE_URL}/application-time-stages/?student=${student_id}`
-      );
-      setStages(response.data);
-    } catch (error) {
-      console.log("Failed to get the stages data", error);
-    }
-  };
+  const admin_id = localStorage.getItem("user_id");
+  const role = localStorage.getItem("role");
 
   useEffect(() => {
+    const getStages = async () => {
+      try {
+        if (role == "admin") {
+          const response = await axios.get(
+            `${API_BASE_URL}/application-time-stages/?user=${admin_id}`
+          );
+          setStages(response.data);
+        } else {
+          const response = await axios.get(
+            `${API_BASE_URL}/application-time-stages/?student=${student_id}`
+          );
+          setStages(response.data);
+        }
+      } catch (error) {
+        console.log("Failed to get the stages data", error);
+      }
+    };
+
     getStages();
   }, []);
 

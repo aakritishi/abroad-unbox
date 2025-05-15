@@ -2,30 +2,32 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { FaRegEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const Stage1 = () => {
   const role = localStorage.getItem("role");
   const navigate = useNavigate();
-  const [responseLink, setResponseLink] = useState();
+  const [responseLink, setResponseLink] = useState([]);
 
-  const handleRedirect = ()=>{
-    navigate('/stage1/add_video');
-  }
+  const handleRedirect = () => {
+    navigate("/stage1/add_video");
+  };
 
-  const getVideoLink = async ()=>{
-    try{
-        const response = await axios.get(`${API_BASE_URL}/stage-one-content/`);
-        if(response){
-            setResponseLink(response.data);
-        }
-    }catch(error){
-        console.log("Failed to fetch the video link", error);
+  const getVideoLink = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/stage-one-content/`);
+      if (response) {
+        setResponseLink(response.data);
+      }
+    } catch (error) {
+      console.log("Failed to fetch the video link", error);
     }
-  }
+  };
 
-  useEffect (()=>{
+  useEffect(() => {
     getVideoLink();
-  },[]);
+  }, []);
 
   return (
     <div className="flex md:flex-row flex-col">
@@ -49,11 +51,32 @@ const Stage1 = () => {
         </p>
       </div>
       <div className="w-full md:w-4/5 lh:w-4/5 bg-white h-svh p- 2 overflow-scroll">
-        {role == "admin" && (
-            <div className="flex justify-end items-end">
-                <button className="px-3 py-2 my-2 rounded-lg text-white bg-green-800" onClick={handleRedirect}>Add Video</button>
-            </div>
+        {role === "admin" && responseLink?.length === 0 ? (
+          <div className="flex justify-end items-end">
+            <button
+              className="px-3 py-2 my-2 rounded-lg text-white bg-green-800"
+              onClick={handleRedirect}
+            >
+              Add Video
+            </button>
+          </div>
+        ):(
+            <div className="flex justify-end gap-2 items-center">
+            <button
+              className="px-3 py-2 my-2 rounded-lg"
+            //   onClick={handleEdit}
+            >
+              <FaRegEdit className="text-blue-500 text-xl"/>
+            </button>
+            <button
+              className="px-3 py-2 my-2 rounded-lg"
+            //   onClick={handleDelete}
+            >
+              <MdDelete className="text-red-600 text-xl"/>
+            </button>
+          </div>
         )}
+
         <div className="bg-gradient-to-r from-[#ffffff] to-blue-300 p-2 w-full text-2xl font-semibold text-center">
           The Mindset
         </div>
@@ -61,10 +84,14 @@ const Stage1 = () => {
           <div className="bg-gradient-to-r from-[#ffffff] to-green-300 px-5 py-3  mt-2 text-center w-full tect-center">
             <p className="text-xl font-medium">SESSION I - The Mindset</p>
           </div>
-          <iframe
-            className="w-full h-[400px] mt-2"
-            src="https://www.youtube.com/embed/ekMIfv0mvqs"
-          ></iframe>
+          {responseLink.length > 0 && (
+            <iframe
+              className="w-full h-[400px] mt-2"
+              src={responseLink[0]?.video_link1}
+              allowFullScreen
+              title="Session 1 - The Mindset"
+            />
+          )}
           <a href="mailto:abroadunbox@gmail.com?subject=Request%20for%20Appointment%20for%20The%20Mindset">
             <div className="bg-green-300 px-5 mx-auto py-3 w-1/2 md:w-1/3 mt-2 border-1 text-center">
               <p className="text-xl font-medium">Request Appointment</p>
@@ -78,10 +105,12 @@ const Stage1 = () => {
           <div className="bg-gradient-to-r from-[#ffffff] to-green-300 px-5 py-3 w-full mt-2 text-center">
             <p className="text-xl font-medium">SESSION II - The Timeline</p>
           </div>
-          <iframe
-            className="w-full h-[600px] mt-2"
-            src="https://www.youtube.com/embed/ekMIfv0mvqs"
-          ></iframe>
+          {responseLink.length > 0 && (
+            <iframe
+              className="w-full h-[600px] mt-2"
+              src={responseLink[0]?.video_link2}
+            ></iframe>
+          )}
           <a href="mailto:abroadunbox@gmail.com?subject=Request%20for%20Appointment%20for%20Application%20Timeline">
             <div className="bg-green-300 px-5 py-3 mx-auto w-1/2 md:w-1/3 mt-2 border-1 text-center">
               <p className="text-xl font-medium">Request Appointment</p>
@@ -95,10 +124,12 @@ const Stage1 = () => {
           <div className="bg-gradient-to-r from-[#ffffff] to-green-300 px-5 py-3 w-full mt-2 text-center">
             <p className="text-xl font-medium">SESSION III - Career</p>
           </div>
-          <iframe
-            className="w-full h-[600px] mt-2"
-            src="https://www.youtube.com/embed/ekMIfv0mvqs"
-          ></iframe>
+          {responseLink.length > 0 && (
+            <iframe
+              className="w-full h-[600px] mt-2"
+              src={responseLink[0]?.video_link3}
+            ></iframe>
+          )}
           <a href="mailto:abroadunbox@gmail.com?subject=Request%20for%20Appointment%20for%20Career%20Counseling">
             <div className="bg-green-300 px-5 py-3 w-1/2 mx-auto md:w-1/3 mt-2 border-1 text-center">
               <p className="text-xl font-medium">Request Appointment</p>
