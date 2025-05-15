@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/bg_img/logo1.png';
 
 function Nav() {
@@ -9,6 +9,7 @@ function Nav() {
   const [role, setRole] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to toggle mobile menu visibility
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -26,12 +27,11 @@ function Nav() {
   }, [location]);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
-    localStorage.removeItem('first_name');
-    localStorage.removeItem('role');
+    localStorage.clear();
     setIsLoggedIn(false);
     setUsername('');
+    navigate('/');
+    window.location.reload();
   };
 
   const toggleMenu = () => {
@@ -56,26 +56,29 @@ function Nav() {
           </ul> */}
           {isLoggedIn ? (
             <ul className="flex gap-10 justify-between">
-              <Link to="/"><li className="hover:text-blue-900 hover:underline">Home</li></Link>
+              {/* <Link to="/"><li className="hover:text-blue-900 hover:underline">Home</li></Link> */}
               <a href="/application"><li className="hover:text-blue-900 hover:underline">Application</li></a>
               <a href="/essay"><li className="hover:text-blue-900 hover:underline">Essay</li></a>
               <a href="/"><li className="hover:text-blue-900 hover:underline">SAT</li></a>
               <a href="/"><li className="hover:text-blue-900 hover:underline">English Proficiency</li></a>
               <a href="/info"><li className="hover:text-blue-900 hover:underline">Info Session</li></a>
+              {role == "admin" &&(
+                <a href="/register_student"><li className="hover:text-blue-900 hover:underline">Register Student</li></a>
+              )}
               <a href="https://www.google.com/maps/dir/?api=1&destination=Abroad Unbox, Kaikastan Marg, Kathmandu 44600" target="_blank">
-                <li className="hover:text-blue-900 hover:underline">Navigate</li>
+                <li className="hover:text-blue-900 hover:underline" title='Kalikastan-29, Kathmandu, Nepal'>Navigate</li>
               </a>
             </ul>
           ) : (
             <ul className="flex gap-10 justify-between">
-              <Link to="/"><li className="hover:text-blue-900 hover:underline">Home</li></Link>
+              {/* <Link to="/"><li className="hover:text-blue-900 hover:underline">Home</li></Link> */}
               <a href="/application"><li className="hover:text-blue-900 hover:underline">Application</li></a>
               <a href="/essay"><li className="hover:text-blue-900 hover:underline">Essay</li></a>
               <a href="/login"><li className="hover:text-blue-900 hover:underline">SAT</li></a>
               <a href="/login"><li className="hover:text-blue-900 hover:underline">English Proficiency</li></a>
               <a href="/info"><li className="hover:text-blue-900 hover:underline">Info Session</li></a>
               <a href="https://www.google.com/maps/dir/?api=1&destination=Abroad Unbox, Kaikastan Marg, Kathmandu 44600" target="_blank">
-                <li className="hover:text-blue-900 hover:underline">Navigate</li>
+                <li className="hover:text-blue-900 hover:underline" title='Kalikastan-29, Kathmandu, Nepal'>Navigate</li>
               </a>
             </ul>
           )}
@@ -122,9 +125,9 @@ function Nav() {
           <a href="/login"><li className="hover:text-blue-900 hover:underline">Essay</li></a>
           <a href="/login"><li className="hover:text-blue-900 hover:underline">SAT</li></a>
           <a href="/login"><li className="hover:text-blue-900 hover:underline">English Proficiency</li></a>
-          <a href="/login"><li className="hover:text-blue-900 hover:underline">Info Session</li></a>
+          <a href="/info"><li className="hover:text-blue-900 hover:underline">Info Session</li></a>
           <a href="https://www.google.com/maps/dir/?api=1&destination=27.7172,85.3240" target="_blank">
-            <li className="hover:text-blue-900 hover:underline">Navigate</li>
+            <li className="hover:text-blue-900 hover:underline" title='Kalikastan-29, Kathmandu, Nepal'>Navigate</li>
           </a>
         </ul>
       </div>

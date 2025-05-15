@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import fullscreen_svg from '../assets/svg/fullscreen-1.svg'
-import smallscreen_svg from '../assets/svg/fullscreen-2.svg'
-import Nav from "./Nav";
-import Footer from "./Footer";
+import fullscreen_svg from '../../assets/svg/fullscreen-1.svg'
+import smallscreen_svg from '../../assets/svg/fullscreen-2.svg'
+import Nav from "../Nav";
+import Footer from "../Footer";
 
 function Info() {
     const [openSection, setOpenSection] = useState(null);

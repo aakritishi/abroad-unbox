@@ -34,6 +34,7 @@ function Login() {
                 localStorage.setItem('username', data.username);
                 localStorage.setItem('first_name', data.first_name);
                 localStorage.setItem('role', data.role);
+                localStorage.setItem('student_id', data.student_id);
                 navigate('/');
             } else {
                 setError(data.error || 'Login failed');

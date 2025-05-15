@@ -7,8 +7,8 @@ import logo from '../assets/bg_img/logo1.png';
 
 function Footer() {
   return (
-    <footer className="px-4 py-2 bg-gradient-to-r from-[#006600] to-[#ffffff] w-full mx-auto mt-3 flex flex-col justify-between md:flex-row lg:flex-row">
-      <div className="w-full sm:w-1/4 mx-auto">
+    <footer className="px-4 h-auto py-2 bg-gradient-to-r from-[#006600] to-[#ffffff] w-full mx-auto mt-3 flex flex-col justify-between md:flex-row lg:flex-row">
+      {/* <div className="w-full sm:w-1/4 mx-auto">
         <p className="text-2xl font-bold text-black">Our Service</p>
         <div className="flex flex-col mt-2">
           <Link to="/login" className="text-black hover:text-green-600">
@@ -42,7 +42,7 @@ function Footer() {
             <span>DET/IELTS/TOFEL</span>
           </Link>
         </div>
-      </div>
+      </div> */}
 
       <div className="w-full sm:w-1/4 mx-auto">
         <p className="text-2xl font-bold text-black">Contact Us</p>
@@ -81,22 +81,21 @@ function Footer() {
           >
             bishal.karki942@gmail.com
           </a>
-          <span>www.abroadunbox.com</span>
         </div>
       </div>
 
       <div className="w-full sm:w-1/4 mx-auto">
         <p className="text-2xl font-bold text-black">Our Office Hours</p>
-        <div className="flex flex-col mt-2">
-          <span>Sunday - Thursday</span>
-          <span>10:00 AM - 5:00 PM</span>
-          <span>Friday & Saturday</span>
-          <span>Closed</span>
+        <div className="flex flex-col mt-2 text-nowrap">
+          <span>Sunday - Thursday: 10:00 AM - 5:00 PM</span>
+          <span></span>
+          <span>Friday & Saturday: Closed</span>
+          <span></span>
         </div>
       </div>
 
       <div className="w-full sm:w-1/4 mx-auto flex flex-col items-center">
-        <img src={logo} alt="logo" className="h-[200px] mx-auto" />
+        <img src={logo} alt="logo" className="h-[100px] mx-auto" />
         <div className="w-full flex flex-row items-center justify-center gap-4 mt-4">
           <a
             href="https://www.facebook.com/share/183SYEbTBd/"
@@ -104,7 +103,7 @@ function Footer() {
             rel="noopener noreferrer"
           >
             <img
-              className="w-12 p-2 hover:bg-black rounded-lg"
+              className="w-7 hover:scale-110 hover:bg-transparent transition-transform duration-200 rounded-none"
               src={facebook_svg}
               alt="Facebook"
             />
@@ -115,7 +114,7 @@ function Footer() {
             rel="noopener noreferrer"
           >
             <img
-              className="w-12 p-2 hover:bg-black rounded-lg"
+              className="w-7 hover:scale-110 hover:bg-transparent transition-transform duration-200 rounded-none"
               src={instagram_svg}
               alt="Instagram"
             />
@@ -126,7 +125,7 @@ function Footer() {
             rel="noopener noreferrer"
           >
             <img
-              className="w-12 p-2 hover:bg-black rounded-lg"
+              className="w-7 hover:scale-110 hover:bg-transparent transition-transform duration-200 rounded-none"
               src={linkedin_svg}
               alt="Linkedin"
             />
@@ -137,7 +136,7 @@ function Footer() {
             rel="noopener noreferrer"
           >
             <img
-              className="w-12 p-2 hover:bg-black rounded-lg"
+              className="w-8 p-0 hover:scale-110 hover:bg-transparent transition-transform duration-200 rounded-none"
               src={yt_svg}
               alt="YouTube"
             />
