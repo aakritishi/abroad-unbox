@@ -15,6 +15,7 @@ function Nav() {
     const token = localStorage.getItem('token');
     const storedUsername = localStorage.getItem('username');
     const storedFirstName = localStorage.getItem('first_name');
+    const role = localStorage.getItem("role");
     const storedRole = localStorage.getItem('role');
     if (token) {
       setIsLoggedIn(true);
@@ -57,7 +58,11 @@ function Nav() {
           {isLoggedIn ? (
             <ul className="flex gap-10 justify-between">
               {/* <Link to="/"><li className="hover:text-blue-900 hover:underline">Home</li></Link> */}
-              <a href="/application"><li className="hover:text-blue-900 hover:underline">Application</li></a>
+              {role == "admin" ?(
+                <a href="/admin_dashboard"><li className="hover:text-blue-900 hover:underline">Application</li></a>
+              ):(
+                <a href="/application"><li className="hover:text-blue-900 hover:underline">Application</li></a>
+              )}
               <a href="/essay"><li className="hover:text-blue-900 hover:underline">Essay</li></a>
               <a href="/"><li className="hover:text-blue-900 hover:underline">SAT</li></a>
               <a href="/"><li className="hover:text-blue-900 hover:underline">English Proficiency</li></a>

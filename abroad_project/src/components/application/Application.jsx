@@ -8,6 +8,12 @@ import axios from "axios";
 import Stage1 from "./Stage1";
 import Stage2 from "./Stage2";
 import Stage3 from "./Stage3";
+import Stage4 from './Stage4';
+import Stage5 from './Stage5';
+import Stage6 from './Stage6';
+import Stage7 from './Stage7';
+import Stage8 from './Stage8';
+import Stage9 from './Stage9';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -22,7 +28,7 @@ function Application() {
   useEffect(() => {
     const getStages = async () => {
       try {
-        if (role == "admin") {
+        if (role === "admin") {
           const response = await axios.get(
             `${API_BASE_URL}/application-time-stages/?user=${admin_id}`
           );
@@ -43,6 +49,38 @@ function Application() {
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
+  };
+
+  const handleStageClick = (stageNumber, isLocked) => {
+    if (isLocked === "unlocked") {
+      setActiveStage(parseInt(stageNumber));
+      setIsMenuOpen(false); 
+    }
+  };
+
+  const renderStageComponent = () => {
+    switch (activeStage) {
+      case 1:
+        return <Stage1 />;
+      case 2:
+        return <Stage2 />;
+      case 3:
+        return <Stage3 />;
+      case 4:
+        return <Stage4 />;
+      case 5:
+        return <Stage5 />;
+      case 6:
+        return <Stage6 />;
+      case 7:
+        return <Stage7 />;
+      case 8:
+        return <Stage8 />;
+      case 9:
+        return <Stage9 />;
+      default:
+        return <div><Stage1/></div>;
+    }
   };
 
   return (
@@ -69,19 +107,19 @@ function Application() {
         />
       </div>
 
-      {/* Stages */}
+      {/* Stages Navigation */}
       <div className="w-full mt-3 flex md:flex-row flex-col gap-3 items-center">
-        {stages.map((stage, index) => (
-          <div key={index} className="w-11/12 md:w-2/3">
+        {stages.map((stage) => (
+          <div key={stage.id} className="w-11/12 md:w-2/3">
             {/* Desktop */}
             <div className="hidden md:flex flex-row justify-between items-center text-white font-bold text-xl">
               <span
-                onClick={() =>
-                  stage.is_locked === "unlocked" && setActiveStage(stage.stage)
-                }
+                onClick={() => handleStageClick(stage.stage, stage.is_locked)}
                 className={`w-full p-3 cursor-pointer ${
                   stage.is_locked === "unlocked"
-                    ? "bg-green-800 hover:bg-green-700"
+                    ? activeStage === parseInt(stage.stage)
+                      ? "bg-green-600"
+                      : "bg-green-800 hover:bg-green-700"
                     : "bg-gray-400"
                 }`}
               >
@@ -96,13 +134,12 @@ function Application() {
             {isMenuOpen && (
               <div className="flex md:hidden justify-between items-center text-white font-bold text-xl">
                 <span
-                  onClick={() =>
-                    stage.is_locked === "unlocked" &&
-                    setActiveStage(stage.stage)
-                  }
+                  onClick={() => handleStageClick(stage.stage, stage.is_locked)}
                   className={`w-full p-3 cursor-pointer ${
                     stage.is_locked === "unlocked"
-                      ? "bg-green-800 hover:bg-green-700"
+                      ? activeStage === parseInt(stage.stage)
+                        ? "bg-green-600"
+                        : "bg-green-800 hover:bg-green-700"
                       : "bg-gray-400"
                   }`}
                 >
@@ -119,9 +156,7 @@ function Application() {
 
       {/* Stage content */}
       <div className="w-11/12 mx-auto p-3 flex gap-3">
-        {activeStage === 1 && <Stage1 />}
-        {activeStage === 2 && <Stage2 />}
-        {activeStage === 3 && <Stage3 />}
+        {renderStageComponent()}
       </div>
 
       <Footer />

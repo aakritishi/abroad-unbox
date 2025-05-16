@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -9,6 +9,8 @@ const Stage1 = () => {
   const role = localStorage.getItem("role");
   const navigate = useNavigate();
   const [responseLink, setResponseLink] = useState([]);
+  const token = localStorage.getItem("token");
+  const [error, setError] = useState("");
 
   const handleRedirect = () => {
     navigate("/stage1/add_video");
@@ -28,6 +30,54 @@ const Stage1 = () => {
   useEffect(() => {
     getVideoLink();
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      const confirm = window.confirm(
+        "Are you sure you want to delete the whole video content?"
+      );
+      if (!confirm) return;
+
+      const response = await axios.delete(
+        `${API_BASE_URL}/stage-one-content/${id}/`
+      );
+      if (response) {
+        alert("Stage 1 video content deleted successfully");
+        getVideoLink();
+      } else {
+        console.log(response.data.detail);
+      }
+    } catch (error) {
+      console.log("Failed to delete the data", error);
+    }
+  };
+
+  const handleEdit = async (id) => {
+    navigate(`/stage1/edit_video/${id}`);
+  };
+
+  const handleSubmit = async (id) => {
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/stage-one-submissions/`,
+        {
+          stage: id,
+        },
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
+      if (response) {
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log("Failed to post the form data", error);
+      // console.log(error.response.data.detail);
+      setError(error.response.data.detail);
+    }
+  };
 
   return (
     <div className="flex md:flex-row flex-col">
@@ -51,31 +101,37 @@ const Stage1 = () => {
         </p>
       </div>
       <div className="w-full md:w-4/5 lh:w-4/5 bg-white h-svh p- 2 overflow-scroll">
-        {role === "admin" && responseLink?.length === 0 ? (
-          <div className="flex justify-end items-end">
-            <button
-              className="px-3 py-2 my-2 rounded-lg text-white bg-green-800"
-              onClick={handleRedirect}
-            >
-              Add Video
-            </button>
-          </div>
-        ):(
+        {role === "admin" &&
+          (responseLink?.length === 0 ? (
+            <div className="flex justify-end items-end">
+              <button
+                className="px-3 py-2 my-2 rounded-lg text-white bg-green-800"
+                onClick={handleRedirect}
+              >
+                Add Video
+              </button>
+            </div>
+          ) : (
             <div className="flex justify-end gap-2 items-center">
-            <button
-              className="px-3 py-2 my-2 rounded-lg"
-            //   onClick={handleEdit}
-            >
-              <FaRegEdit className="text-blue-500 text-xl"/>
-            </button>
-            <button
-              className="px-3 py-2 my-2 rounded-lg"
-            //   onClick={handleDelete}
-            >
-              <MdDelete className="text-red-600 text-xl"/>
-            </button>
-          </div>
-        )}
+              <button className="px-3 py-2 my-2 rounded-lg">
+                <FaRegEdit
+                  className="text-blue-500 text-xl"
+                  onClick={() => handleEdit(responseLink[0]?.id)}
+                />
+              </button>
+              <button className="px-3 py-2 my-2 rounded-lg">
+                <MdDelete
+                  className="text-red-600 text-xl"
+                  onClick={() => handleDelete(responseLink[0]?.id)}
+                />
+              </button>
+              <div>
+                <button>
+                  <Link to="/stage1/view">View</Link>
+                </button>
+              </div>
+            </div>
+          ))}
 
         <div className="bg-gradient-to-r from-[#ffffff] to-blue-300 p-2 w-full text-2xl font-semibold text-center">
           The Mindset
@@ -155,9 +211,15 @@ const Stage1 = () => {
           </a>
         </div>
         <a>
-          <div className="bg-gradient-to-l from-[#ffffff] to-green-300 py-4 text-center w-full text-2xl font-semibold mt-5 cursor-pointer">
+          {error && (
+            <p className="text-lg text-center text-red-500 mt-3">{error}</p>
+          )}
+          <button
+            onClick={() => handleSubmit(responseLink[0]?.stage)}
+            className="bg-gradient-to-l from-[#ffffff] to-green-300 hover:from-[#ffffff] hover:to-green-500 py-4 text-center w-full text-2xl font-semibold mt-3 cursor-pointer"
+          >
             Stage 1: Submit
-          </div>
+          </button>
         </a>
       </div>
     </div>
